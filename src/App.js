@@ -3,11 +3,20 @@ import React from 'react';
 import HomePage from './pages/homepage/homepage.component';
 
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+
+function Test(props) {
+  console.log(props)
+  return <h1>Heelo</h1>
+}
 
 function App() {
   return (
     <div>
-      <HomePage />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/hats' element={<Test />} />
+      </Routes>
     </div>
   );
 }
