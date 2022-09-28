@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 
 function Test(props) {
   console.log(props)
-  return <h1>Heelo</h1>
+  return <h1>React Router Dom is sux</h1>
 }
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/hats' element={<Test />} />
+        <Route path='/shop/hats' element={<Test />} />
       </Routes>
     </div>
   );
