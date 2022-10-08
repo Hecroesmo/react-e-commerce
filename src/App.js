@@ -31,7 +31,7 @@ class App extends React.Component {
               id: userRef.id,
               ...user.data()
             }
-          }, () => console.log(this.state))
+          })
         })
       }
       else {
