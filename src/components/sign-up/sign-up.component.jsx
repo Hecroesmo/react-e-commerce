@@ -1,4 +1,6 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import CustomeButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 
@@ -16,8 +18,34 @@ class SignUp extends React.Component {
   }
 
   handleChange = event => {
-    const {value, name} = event.target
-    this.setState({[name]: value})
+    const { value, name } = event.target
+    this.setState({ [name]: value })
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+
+    const { displayName, email, password, confirmPassword } = this.state
+
+    if (password !== confirmPassword) {
+      alert('passwords don\'t match')
+      return;
+    }
+
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
+      await createUserProfileDocument(user, { displayName })
+
+      this.setState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      })
+    }
+    catch (e) {
+      console.log(e.message)
+    }
   }
 
   render() {
