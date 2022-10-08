@@ -31,11 +31,11 @@ class App extends React.Component {
               id: userRef.id,
               ...user.data()
             }
-          })
+          }, () => console.log(this.state))
         })
       }
       else {
-        this.setState({ currentUser: null })
+        this.setState({currentUser: userAuth})
       }
     })
   }

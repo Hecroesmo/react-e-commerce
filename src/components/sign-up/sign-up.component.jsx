@@ -50,10 +50,11 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="sign-up">
         <h2>I do not have an account</h2>
         <span>sign up with your email and password</span>
-        <form>
+
+        <form onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
             name="displayName"
@@ -65,7 +66,7 @@ class SignUp extends React.Component {
 
           <FormInput
             type="email"
-            name="Email"
+            name="email"
             value={this.state.email}
             handleChange={this.handleChange}
             label="Email"
@@ -90,7 +91,7 @@ class SignUp extends React.Component {
             required
           />
 
-          <CustomeButton>Sign Up</CustomeButton>
+          <CustomeButton type="submit">Sign Up</CustomeButton>
         </form>
 
       </div>
