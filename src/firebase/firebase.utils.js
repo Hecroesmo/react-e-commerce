@@ -28,30 +28,30 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-  
-//  console.log(usersRef)
- const docRef = doc(firestore, "users", userAuth.uid)
- const docSnap = await getDoc(docRef);
 
- if (!docSnap.exists()) {
-  const {displayName, email} = userAuth
-  const createAt = new Date()
+  const docRef = doc(firestore, "users", userAuth.uid)
+  const docSnap = await getDoc(docRef);
 
-  const usersRef = collection(firestore, "users")
+  if (!docSnap.exists()) {
+    const { displayName, email } = userAuth
+    const createAt = new Date()
 
-  try {
-    await setDoc(doc(usersRef, userAuth.uid), {
-      displayName,
-      email,
-      createAt,
-      ...additionalData
-    })  
+    const usersRef = collection(firestore, "users")
+
+    try {
+      await setDoc(doc(usersRef, userAuth.uid), {
+        displayName,
+        email,
+        createAt,
+        ...additionalData
+      })
+    }
+    catch (e) {
+      console.log('error creating user', e.message)
+    }
   }
-  catch(e) {
-    console.log('error creating user', e.message)
-  }
- }
-//  console.log('createUserProfileDocument', docSnap.data)
+
+  return docRef
 }
 
 export default app
