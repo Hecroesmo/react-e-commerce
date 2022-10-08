@@ -53,10 +53,8 @@ class SignIn extends React.Component {
           />
           <div className="button-container">
             <CustomeButton type="submit">Sign In</CustomeButton>
-            <CustomeButton onClick={ signInWithGoogle }>
-              {' '}
+            <CustomeButton onClick={ signInWithGoogle } isGoogleSignIn>
               Sign In With Google
-              {' '}
             </CustomeButton>
           </div>
         </form>

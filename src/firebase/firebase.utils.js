@@ -3,8 +3,8 @@ import { initializeApp } from "firebase/app";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore } from 'firebase/firestore/lite';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getFirestore, collection, doc, query } from 'firebase/firestore/lite';
+import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,9 +20,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const firestore = getFirestore(app)
 export const auth = getAuth(app)
+setPersistence(auth, browserSessionPersistence)
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => signInWithPopup(auth, provider)
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = collection(firestore, `users`)
+
+  console.log(query(doc(userRef, `${userAuth.uid}`)))
+  // const snapshot = await userRef.get()
+  // console.log(snapshot)
+}
 
 export default app
